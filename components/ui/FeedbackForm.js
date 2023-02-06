@@ -16,8 +16,18 @@ export default function FeedbackForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(data);
-    setSubmitted(true);
+
+    try {
+      await fetch('api/mailtrap', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then(() => setSubmitted(true));
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
