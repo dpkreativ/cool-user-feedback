@@ -6,8 +6,7 @@ import { useContext } from 'react';
 import { AppContext } from './_app';
 
 export default function Home() {
-  const value = useContext(AppContext);
-  const { submitted } = value;
+  const { submitted } = useContext(AppContext);
 
   return (
     <>
@@ -21,9 +20,6 @@ export default function Home() {
       <HomeLayout>
         <section className="md:rounded-3xl md:shadow-lg bg-[#fcfcfc37] overflow-hidden max-w-7xl mx-auto">
           {submitted ? <ThankYouMessage /> : <FeedbackForm />}
-          {/* 
-          <FeedbackForm />
-          <ThankYouMessage /> */}
         </section>
       </HomeLayout>
     </>

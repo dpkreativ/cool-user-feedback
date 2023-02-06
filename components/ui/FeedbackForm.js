@@ -1,8 +1,23 @@
+import { AppContext } from '@/pages/_app';
 import Image from 'next/image';
+import { useContext, useState } from 'react';
 
 export default function FeedbackForm() {
+  const { setSubmitted } = useContext(AppContext);
+
+  const [data, setData] = useState({
+    name: '',
+    feedback: '',
+  });
+
+  function handleChange(e) {
+    setData({ ...data, [e.target.name]: e.target.value });
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
+    console.log(data);
+    setSubmitted(true);
   }
 
   return (
@@ -25,7 +40,11 @@ export default function FeedbackForm() {
             Fill out the form below and we'll be in touch as soon as possible
           </p>
         </div>
-        <form className="grid gap-16" onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit}
+          onChange={handleChange}
+          className="grid gap-16"
+        >
           <div className="border-2 border-[#434058] rounded-2xl p-4">
             <input
               type="text"
@@ -33,7 +52,6 @@ export default function FeedbackForm() {
               id="name"
               placeholder="Your name"
               className="w-full outline-none placeholder:text-sm placeholder:font-light placeholder:text-[#43405874]"
-              onChange={(e) => console.log(e.target.value)}
             />
           </div>
           <div className="border-2 border-[#434058] rounded-2xl p-4">
@@ -42,7 +60,6 @@ export default function FeedbackForm() {
               id="feedback"
               placeholder="Your feedback"
               className="w-full outline-none placeholder:text-sm placeholder:font-light placeholder:text-[#43405874]"
-              onChange={(e) => console.log(e.target.value)}
             ></textarea>
           </div>
           <div className="mx-auto">
